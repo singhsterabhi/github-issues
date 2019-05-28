@@ -18,11 +18,11 @@ class App extends Component {
     //   urlp[4]
     // }/issues?since=${dayWrapper}`;
 
-    // const reqUrl = `https://api.github.com/repos/${urlp[3]}/${urlp[4]}`;
+    const reqUrl = `https://api.github.com/repos/${urlp[3]}/${urlp[4]}`;
 
-    const reqUrl = `https://api.github.com/search/issues?q=repo:${urlp[3]}/${
-      urlp[4]
-    }+type:issue+state:open+created_at>=${dayWrapper}`;
+    // const reqUrl = `https://api.github.com/search/issues?q=repo:${urlp[3]}/${
+    //   urlp[4]
+    // }+type:issue+state:open+created_at>=${dayWrapper}`;
 
     console.log(reqUrl);
     const data = await fetch(reqUrl).then(d => d.json());
