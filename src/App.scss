@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+
 * {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .app {
@@ -18,21 +19,20 @@ form {
   width: 100%;
 
   input {
-    width:100%;
+    width: 100%;
     max-width: 400px;
     text-align: center;
     height: 30px;
     font-size: 20px;
     border-radius: 5px;
     border: 2px solid #0eb1b1;
-    margin:10px;
+    margin: 10px;
     padding: 0 10px;
 
     &:focus {
       outline: none;
     }
   }
-  
 }
 
 button {
@@ -44,9 +44,8 @@ button {
   line-height: 35px;
   border-radius: 10px;
   border: none;
-  // margin-top: 10px;
-  
-  &:hover{
+
+  &:hover {
     cursor: pointer;
     box-shadow: 2px 2px 2px #bbb;
   }
@@ -56,43 +55,53 @@ button {
   }
 }
 
-.table{
-  text-align:center;
-}
-
-table{
-  width:80%;
-  border-collapse: collapse;
-  margin:30px auto;
-  text-align:left;
-
-  td{
-    border-bottom:2px solid #0eb1b1;
-    padding:4px 10px ;
-  }
-  th{
-    border-bottom:2px solid #0eb1b1;
-    padding:4px 5px ;
-  }
-}
-
-.display{
+.table {
   text-align: center;
-  margin:20px;
+}
 
-  input{
-    background:white;
+table {
+  width: 80%;
+  border-collapse: collapse;
+  margin: 30px auto;
+  text-align: left;
+
+  td {
+    border-bottom: 2px solid #0eb1b1;
+    padding: 4px 10px;
+  }
+
+  th {
+    border-bottom: 2px solid #0eb1b1;
+    padding: 4px 5px;
+  }
+}
+
+.display {
+  text-align: center;
+  margin: 20px;
+
+  input {
+    background: white;
     cursor: pointer;
     box-shadow: none;
     border: 0;
-    &:hover{
+
+    &:hover {
       cursor: pointer;
       text-decoration: underline;
       color: #0eb1b1;
     }
-  
+
     &:focus {
       outline: none;
     }
+  }
+
+  .repo {
+    max-width: 30%;
+  }
+
+  a {
+    color: black;
   }
 }

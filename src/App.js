@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import moment from "moment";
 import "./App.scss";
 import fire from "./firebase";
-// import "firebase/database";
+import "firebase/database";
+const database = fire.database();
 
 class App extends Component {
   state = {
@@ -83,7 +84,7 @@ class App extends Component {
         return;
       });
 
-    console.log(data);
+    // console.log(data);
     if (!data.hasOwnProperty("total_count")) {
       this.errorHandle();
       return;
@@ -97,7 +98,12 @@ class App extends Component {
     // updating state
     this.setState({
       searching: false,
-      repo: `${url[3]}-${url[4]}`,
+      repo: `${url[3]}-${url[4]}`
+        .replace(".", "-")
+        .replace("#", "-")
+        .replace("$", "-")
+        .replace("[", "-")
+        .replace("]", "-"),
       openIssues,
       pastOneDay,
       betOneToSeven,
@@ -144,11 +150,8 @@ class App extends Component {
       beforeSeven,
       repository
     } = this.state;
-    // const database = fire.database();
-    console.log(repo, repository, openIssues);
 
-    fire
-      .database()
+    database
       .ref("data/" + repo)
       .set({
         repo,
@@ -159,14 +162,15 @@ class App extends Component {
         repository
       })
       .then(() => {
-        console.log("Successfully written");
+        // console.log("Successfully written");
         this.setState({
           searching: false,
           repo: "",
           openIssues: "",
           pastOneDay: "",
           betOneToSeven: "",
-          beforeSeven: ""
+          beforeSeven: "",
+          repository: ""
         });
       });
   };
@@ -230,7 +234,8 @@ class App extends Component {
 // Component to display saved data
 class Display extends Component {
   state = {
-    display: false
+    display: false,
+    data: {}
   };
 
   // Toogle data display div
@@ -238,7 +243,43 @@ class Display extends Component {
     this.setState({ display: !this.state.display });
   };
 
+  // fetch saved data from firebase
+  async componentDidMount() {
+    const data = await database
+      .ref("/data/")
+      .once("value")
+      .then(function(snapshot) {
+        // console.log(snapshot.val());
+        return snapshot.val();
+      });
+    this.setState({ data });
+  }
+
   render() {
+    let el = [];
+
+    // mapping over fetched data
+    if (this.state.data)
+      el = Object.keys(this.state.data).map(m => {
+        return (
+          <tr key={this.state.data[m].repo}>
+            <td className="repo">
+              <a
+                href={this.state.data[m].repository}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {this.state.data[m].repo}
+              </a>
+            </td>
+            <td>{this.state.data[m].openIssues}</td>
+            <td>{this.state.data[m].pastOneDay}</td>
+            <td>{this.state.data[m].betOneToSeven}</td>
+            <td>{this.state.data[m].beforeSeven}</td>
+          </tr>
+        );
+      });
+
     return (
       <div className="display">
         <input
@@ -247,29 +288,24 @@ class Display extends Component {
           onClick={this.showData}
         />
         {this.state.display ? (
-          <div>
-            <p>Saved data</p>
-            <table>
-              <thead>
-                <tr>
-                  <th>Repo</th>
-                  <th>Open Issues</th>
-                  <th>&#60;= 1d</th>
-                  <th>&#62; 1d &amp; &#60;= 7d</th>
-                  <th>&#62; 7d</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>sca</td>
-                  <td>10</td>
-                  <td>3</td>
-                  <td>5</td>
-                  <td>2</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          this.state.data ? (
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Repo</th>
+                    <th>Open Issues</th>
+                    <th>&#60;= 1d</th>
+                    <th>&#62; 1d &amp; &#60;= 7d</th>
+                    <th>&#62; 7d</th>
+                  </tr>
+                </thead>
+                <tbody>{el}</tbody>
+              </table>
+            </div>
+          ) : (
+            <p>No saved data</p>
+          )
         ) : (
           ""
         )}
