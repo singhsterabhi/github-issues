@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
-body {
+* {
   font-family: 'Raleway', sans-serif;
 }
 
@@ -18,50 +18,81 @@ form {
   width: 100%;
 
   input {
-    width: 400px;
+    width:100%;
+    max-width: 400px;
     text-align: center;
     height: 30px;
     font-size: 20px;
     border-radius: 5px;
     border: 2px solid #0eb1b1;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  // input
-  
-  button {
-    width: 100px;
-    background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-    height: 35px;
-    color: white;
-    font-size: 18px;
-    line-height: 35px;
-    border-radius: 10px;
-    border: none;
-    margin-top: 10px;
-    
-    &:hover{
-      cursor: pointer;
-    }
+    margin:10px;
+    padding: 0 10px;
 
     &:focus {
       outline: none;
     }
   }
   
+}
+
+button {
+  width: 100px;
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  height: 35px;
+  color: white;
+  font-size: 18px;
+  line-height: 35px;
+  border-radius: 10px;
+  border: none;
+  // margin-top: 10px;
+  
+  &:hover{
+    cursor: pointer;
+    box-shadow: 2px 2px 2px #bbb;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.table{
+  text-align:center;
 }
 
 table{
   width:80%;
   border-collapse: collapse;
   margin:30px auto;
+  text-align:left;
 
   td{
-    border-bottom:2px solid #ddd;
-    padding:3px 10px ;
+    border-bottom:2px solid #0eb1b1;
+    padding:4px 10px ;
+  }
+  th{
+    border-bottom:2px solid #0eb1b1;
+    padding:4px 5px ;
   }
 }
 
+.display{
+  text-align: center;
+  margin:20px;
+
+  input{
+    background:white;
+    cursor: pointer;
+    box-shadow: none;
+    border: 0;
+    &:hover{
+      cursor: pointer;
+      text-decoration: underline;
+      color: #0eb1b1;
+    }
+  
+    &:focus {
+      outline: none;
+    }
+  }
+}
