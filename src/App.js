@@ -293,7 +293,7 @@ class Display extends Component {
               <table>
                 <thead>
                   <tr>
-                    <th>Repo</th>
+                    <th className="repo">Repo</th>
                     <th>Open Issues</th>
                     <th>&#60;= 1d</th>
                     <th>&#62; 1d &amp; &#60;= 7d</th>
