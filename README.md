@@ -12,7 +12,7 @@ Displays a table with the following information -
 - Data is stored on Firebase.
 - Saved data is fetched and displayed in a table. 
 
-### `Improvements
+### Improvements
 
 - The main improvent that can be made is in the UI.
 - The code can be better optimised.
